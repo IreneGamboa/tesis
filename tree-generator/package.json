@@ -1,0 +1,18 @@
+{
+  "name": "tree-generator",
+  "version": "1.0.0",
+  "description": "Tree Generator for Den3D",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "tree",
+    "generator"
+  ],
+  "author": "Irene Gamboa <ireniuxgp@gmail.com>",
+  "license": "ISC",
+  "dependencies": {
+    "file-saver": "^1.3.3"
+  }
+}
