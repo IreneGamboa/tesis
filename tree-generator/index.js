@@ -139,6 +139,37 @@ function createWithTree(cantNivels,nodeXLeaf){
 
 }
 
+function createDepthTree(cantNivels, maxNode){
+  var listNodes = [],
+		  listTree = []
+      tree = "",
+      nameFile = "tree_depth_"+cantNivels+"_nivels",
+      raiz = generateNode("raiz_"+nameFile);
+
+  listTree.push(raiz);
+  listNodes.push(raiz);
+  tree = tree + JSON.stringify(raiz) + "\n"
+  console.log(listNodes[0]);
+
+  while(cantNivels > 0){
+    var nodes = Math.floor(Math.random() * Math.floor(maxNode)+1),
+        indexListNodes = Math.floor((Math.random() * listNodes.length-1) + 1),
+        nodeFather = listNodes[indexListNodes];
+    console.log(nodes)
+    listNodes = [];
+    for (i = 1; i <= nodes; i++){
+      var node = generateNode(i);
+      assignParent(node, nodeFather);
+      listNodes.push(node);
+      listTree.push(node);
+      tree = tree + JSON.stringify(node) + "\n"
+    }
+    cantNivels--;
+  }
+  console.log(tree);
+  generateJSONFile(nameFile, tree);
+}
+
 // createRandomTree(200);
 
 // createTree(4,7);
@@ -167,5 +198,15 @@ if (process.argv.length <= 2){
             console.log("Debe ingresar más parámetros ejemplo: \n anchura cant_niveles [3] node_leaf [4]");
           }
           break;
+      case 'profundidad':
+          if (process.argv.length === 5){
+            var cantNivels = process.argv[3],
+                maxNode = process.argv[4];
+            createDepthTree(cantNivels, maxNode);
+          } else {
+            console.log("Debe ingresar más parámetros ejemplo: \n anchura cant_niveles [10] maxNode [4]");
+          }
+          break;
+
     }
 }
