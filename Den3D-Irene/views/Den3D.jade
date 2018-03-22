@@ -1,0 +1,394 @@
+doctype html
+html(lang='en')
+	head
+		title Den3D
+		meta(charset='utf-8')
+		meta(name='viewport', content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0')
+		script(src='/js/handlebars-v3.0.3.js')
+		script(src='/js/jquery-1.9.1.js')
+		script(src='/js/jquery-ui.js')
+		link(rel='stylesheet', type='text/css', href='/css/font-awesome.min.css')
+		// Latest compiled and minified CSS
+		link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+		// Latest compiled and minified JavaScript
+		script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+		// AJAX for modal
+		link(rel='stylesheet', type='text/css', href='/css/styles.css')
+		script(src='https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js')
+	// Incluir librerias exteriores
+	script(src='/js/three.min.js')
+	script(src='/js/Detector.js')
+	script(src='/js/Stats.js')
+	script(src='/js/OrbitControls.js')
+	script(src='/js/THREEx.KeyboardState.js')
+	script(src='/js/THREEx.FullScreen.js')
+	script(src='/js/THREEx.WindowResize.js')
+	script(src='/js/renderers/Projector.js')
+	script(src='/js/renderers/CanvasRenderer.js')
+	script(src='/js/libs/stats.min.js')
+	script(src='/js/libs/tween.min.js')
+	script(src='/fonts/helvetiker_regular.typeface.js')
+	script(src='/fonts/helvetiker_bold.typeface.js')
+	// 
+	script(type='text/javascript', src='/js/DAT.GUI.min.js')
+	// jQuery code to display an information button and box when clicked.
+	link(rel='stylesheet', href='/css/jquery-ui.css')
+	link(rel='stylesheet', href='/css/info.css')
+	script(src='/js/info.js')
+	link(rel='stylesheet', type='text/css', href='/css/index.css')
+	body
+		// Form Docx
+		form#generacion(action='/core/makeSumary', method='post')
+			input#idDocx(type='hidden', name='idElement', value='')
+		// Modal Trees
+		#modalShowTrees.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+			.modal-dialog.modal-lg(role='document')
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#myModalLabel.modal-title My Trees
+					.modal-body
+						h1.titleTrees Choose your tree
+						ul.listTrees
+							li.itemTree
+								img.img-circle.imgTree(src='/images/Agalychnis lemur.jpg', alt='Cinque Terre', height='50px')
+								span Ranas verdes
+							li.itemTree
+								img.img-circle.imgTree(src='/images/Bolitoglossa alvaradoi.jpg', alt='Cinque Terre', height='50px')
+								span Salamandra
+							li.itemTree
+								img.img-circle.imgTree(src='/images/Dermophis glandulosus.jpg', alt='Cinque Terre', height='50px')
+								span Lombrices de tierra
+							li.itemTree
+								img.img-circle.imgTree(src='/images/Dendrobates pumilio.jpg', alt='Cinque Terre', height='50px')
+								span Ranas Venenosas
+						.row
+							.col-12.submit(style='margin-left: 30%; float: left; marging-')
+								label(for='submitCreate') Open
+		// Modal Update Node
+		img#loading-indicator(src='/assets/img/clock.gif', style='display:none')
+		#modelUpdateNode.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+			.modal-dialog.modal-lg(role='document')
+				.modal-content
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#myModalLabel.modal-title Update Node
+					.modal-body
+						form#updateNode
+							.row
+								.col-sm-4
+									img#imageUpdate.img-circle(src='/images/Anfibios.jpg')
+									label.labelFile(for='fileCreateUpdate') Choose File
+									input#fileCreateUpdate.inputFile(type='file', name='upl', accept='image/*', onchange='onFileSelected(event,"imageUpdate")')
+								.col-sm-8
+									input#validNameUpdate(name='validName', type='text', placeholder='Valid Name')
+									textarea#descriptionUpdate.form-control(name='description', placeholder='Description:', rows='4')
+									input#urlUpdate(name='url', type='text', placeholder='url')
+							.row
+								.col-sm-4
+									label.subTitle Add children:
+								.col-sm-8
+									.form-footer
+										.buttons
+											button#btn-less-Update(type='button')   -
+											input#numberChildrenUpdate(name='numberChildren', placeholder='0')
+											button#btn-more-Update(type='button')   +
+										.submit
+											label(for='submitUpdate') Update node
+										input#submitUpdate(type='submit')
+		// Modal
+		#modelNewNode.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+			.modal-dialog.modal-lg(role='document')
+				.modal-content.bform
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#myModalLabel.modal-title Create New Tree
+					.modal-body
+						// <form method="POST" action="http://192.168.0.21:3030/taxon/file_upload" enctype="multipart/form-data" name="newNode">
+						form#newNode
+							.row
+								.col-sm-4
+									img#myimage.img-circle(src='/images/rana.jpg')
+									label.labelFile(for='fileCreateNN') Choose File
+									input#fileCreateNN.inputFile(type='file', name='upl', accept='image/*', onchange='onFileSelected(event,"myimage")')
+								.col-sm-8
+									input#validNameNN(name='validName', type='text', placeholder='Valid Name')
+									textarea#descriptionNN.form-control(name='description', placeholder='Description:', rows='4')
+									input#urlNN(name='url', type='text', placeholder='url')
+							.row
+								.col-sm-4
+									label.subTitle Number of Children:
+								.col-sm-8
+									.form-footer
+										.buttons
+											button#btn-less-create(type='button') -
+											input#numberChildren(name='numberChildren', type='text', placeholder='0')
+											button#btn-more-create(type='button') +
+										.submit
+											label(for='submitCreate') Create New Tree
+										input#submitCreate(type='submit')
+		// Modal Update Node
+		// Modal Add Right
+		#modelAddRight.modal.fade.bs-example-modal-lg(tabindex='-1', role='dialog', aria-labelledby='myModalLabel')
+			.modal-dialog.modal-lg(role='document')
+				.modal-content.bform
+					.modal-header
+						button.close(type='button', data-dismiss='modal', aria-label='Close')
+							span(aria-hidden='true') ×
+						h4#myModalLabel.modal-title Add node to the right of node
+					.modal-body
+						// <form method="POST" action="http://192.168.0.21:3030/taxon/file_upload" enctype="multipart/form-data" name="newNode">
+						form#newNodeRight
+							.row
+								.col-sm-4
+									img#myimage2.img-circle(src='/images/rana.jpg')
+									label.labelFile(for='fileCreateNNR') Choose File
+									input#fileCreateNNR.inputFile(type='file', name='upl', accept='image/*', onchange='onFileSelected(event,"myimage2")')
+								.col-sm-8
+									input#validNameNNR(name='validName', type='text', placeholder='Valid Name')
+									textarea#descriptionNNR.form-control(name='description', placeholder='Description:', rows='4')
+									input#urlNNR(name='url', type='text', placeholder='url')
+							.row
+								.col-sm-4
+									label.subTitle Number of Children:
+								.col-sm-8
+									.form-footer
+										.buttons
+											button#btn-less-createR(type='button') -
+											input#numberChildrenNNR(name='numberChildren', type='text', placeholder='0')
+											button#btn-more-createR(type='button') +
+										.submit
+											label(for='submitCreate2') Create New Tree
+										input#submitCreate2(type='submit')
+		.Den3D
+			p(href='#demo', data-toggle='collapse')
+				span
+					| Den 3D
+					span.glyphicon.glyphicon-chevron-down
+			ul#demo.collapse
+				li
+					.row(data-toggle='collapse', data-target='#edit')
+						.col-md-2(style='margin-left: 15px;')
+							img.imgDen3D(src='/assets/img/Lapiz.png')
+						.col-md-7.textDen3D Edit
+						.col-md-2.textDen3D
+							span.glyphicon.glyphicon-chevron-down
+					ul#edit.collapse
+						li(onmouseover='hoverItem(this,"../assets/img/New node Blue.png")', onmouseout='hoverItem(this,"../assets/img/New Node.png")')
+							p#newNodeSpan
+								img(src='/assets/img/New Node.png')
+								|                 New tree
+						li(onmouseover='hoverItem(this,"../assets/img/New node Blue.png")', onmouseout='hoverItem(this,"../assets/img/New Node.png")')
+							p#addRight
+								img(src='/assets/img/New Node.png')
+								|                 Add node to the right
+						li(onmouseover='hoverItem(this,"../assets/img/UpdateBlue.png")', onmouseout='hoverItem(this,"../assets/img/Update.png")')
+							p#updateNodeSpan
+								img(src='/assets/img/Update.png')
+								|                 Update node
+						li(onmouseover='hoverItem(this,"../assets/img/snipBlue.png")', onmouseout='hoverItem(this,"../assets/img/snip.png")')
+							p#snipNodeSpan
+								img(src=' /assets/img/snip.png')
+								|                 Snip tree
+						li(onmouseover='hoverItem(this,"../assets/img/pruneBlue.png")', onmouseout='hoverItem(this,"../assets/img/prune.png")')
+							p#pruneNodeSpan
+								img(src='/assets/img/prune.png')
+								|                 Prune tree
+						li(onmouseover='hoverItem(this,"../assets/img/LinkBlue.png")', onmouseout='hoverItem(this,"../assets/img/Link.png")')
+							p#linkNodeSpan
+								img(src='/assets/img/Link.png')
+								|                 Link tree to node
+						li(onmouseover='hoverItem(this,"../assets/img/LinkBlue.png")', onmouseout='hoverItem(this,"../assets/img/Link.png")')
+							p#linkRight
+								img(src='/assets/img/Link.png')
+								|                 Link tree to the right of node
+						li(onmouseover='hoverItem(this,"../assets/img/changeBlue.png")', onmouseout='hoverItem(this,"../assets/img/change.png")')
+							p#changeNodeSpan
+								img(src='/assets/img/change.png')
+								|                 Bring tree
+						li(onmouseover='hoverItem(this,"../assets/img/swapBlue.png")', onmouseout='hoverItem(this,"../assets/img/swap.png")')
+							p#swapNodeSpan
+								img(src='/assets/img/swap.png')
+								|                 Swap trees
+						li(onmouseover='hoverItem(this,"../assets/img/DeleteBlue.png")', onmouseout='hoverItem(this,"../assets/img/Delete.png")')
+							p#deleteNodeSpan
+								img(src='/assets/img/Delete.png')
+								|                 Delete tree
+						li(onmouseover='hoverItem(this,"../assets/img/undoBlue.png")', onmouseout='hoverItem(this,"../assets/img/undo.png")')
+							p#UndoSpan
+								img(src='/assets/img/undo.png')
+								|                 Undo
+				li
+					// <p data-toggle="collapse" data-target="#seachSpam"><img src="../assets/img/Lupa.png">Search<span class="glyphicon glyphicon-chevron-down"></span></p>
+					.row(data-toggle='collapse', data-target='#seachSpam')
+						.col-md-2(style='margin-left: 15px;')
+							img.imgDen3D(src='/assets/img/Lupa.png')
+						.col-md-7.textDen3D Search
+						.col-md-2.textDen3D
+							span.glyphicon.glyphicon-chevron-down
+					#seachSpam.collapse
+						.search
+							input#search.search(type='text', placeholder='Search')
+						.radio
+							label
+								input#radioValidName(type='radio', name='optradio', checked='true', onclick='clickRadioValidName(this)')
+								| By valid name
+						.radio
+							label
+								input#radioCommonName(type='radio', name='optradio', onclick='clickRadioCommonName(this)')
+								| By common name
+						.radio
+							label
+								input#radioDescription(type='radio', name='optradio', onclick='clickRadioDescription(this)')
+								| By description
+				li
+					.row(data-toggle='collapse', data-target='#Taxonomies')
+						.col-md-2(style='margin-left: 15px;')
+							img.imgDen3D(src='/assets/img/Bosque.png')
+						.col-md-7.textDen3D Taxonomies
+						.col-md-2.textDen3D
+							span.glyphicon.glyphicon-chevron-down
+					ul#Taxonomies.collapse
+						li(data-target='#modalShowTrees', data-toggle='modal')
+							p#publicTrees Public Trees
+						li(data-target='#modalShowTrees', data-toggle='modal')
+							p#myTrees My Trees
+				li
+					// <p id="reportSpan">Report</p>
+					#reportSpan.row
+						.col-md-2(style='margin-left: 15px;')
+							img.imgDen3D(src='/assets/img/Document.png')
+						.col-md-7.textDen3D Report
+		.user
+			.userImage
+				span
+					img.img-circle(src='/assets/img/Username.png', width='45px', alt='User')
+					span#userName #{email_user}
+		.forestBar
+			img(src='/assets/img/Bosque.png', href='#forestBar', data-toggle='collapse')
+			ul#forestBar.collapse
+				li
+					img.img-circle(src='/assets/img/Icono 1.png', alt='Cinque Terre', height='50px')
+					span Nombre del node
+				li
+					img.img-circle(src='/assets/img/Icono 1.png', alt='Cinque Terre', height='50px')
+					span Nombre del node
+				li
+					img.img-circle(src='/assets/img/Icono 1.png', alt='Cinque Terre', height='50px')
+					span Nombre del node
+		#ThreeJS.ThreeJS(style='position:relative')
+			.card-container
+				//
+					Aqui es donde aparecen las fichas.
+			.mark-container
+				#markedItems.modalDialog-mark.expand(style='display: none;')
+					.modal-header-mark
+						h5.card-title-mark Marked items
+						.btn-group-mark
+							button#closeMark.close-card-btn-mark(title='Close')
+								img(src='/assets/img/x.png')
+					hr.card-separator-mark
+					.card-body-mark
+						.scroll-desc-mark
+							ul#itemsMarked.listItems
+								li it1
+								li it2
+								li ...
+								li itn
+					.footer-button
+						button#upItem.footer-button(onclick='upItem()', title='Up')
+							img(src='/assets/img/up.png')
+						button#downItem.footer-button(onclick='downItem()', title='Down')
+							img(src='/assets/img/down.png')
+						button.footer-button(onclick='sortAlphabetic()', title='Alphabetic')
+							img(src='/assets/img/AZ.png')
+						button.footer-button(onclick='sortCrono()', title='Chronologically')
+							img(src='/assets/img/Clock.png')
+						button.footer-button(onclick='generarDocx()', title='Generate')
+							img(src='/assets/img/Document.png')
+						button#deleteItem.footer-button(onclick='deleteItem()', title='Delete')
+							img(src='/assets/img/Delete.png')
+				#searchModal.modalDialog-mark.expand(style='display: none;')
+					.modal-header-mark
+						h5.card-title-mark Search results 
+						.btn-group-mark
+							button#closeSearch.close-card-btn-mark(title='Close')
+								img(src='/assets/img/x.png')
+					hr.card-separator-mark
+					.card-body-mark
+						.scroll-desc-mark
+							ul#itemsSearch.listItems
+					.footer-button(style='background-color:#3F3F3F')
+						spam#btn-open-bc.labelFile Open baseball Card      
+			#tooltip.tooltip-container
+				//
+					Aqui es donde aparece el tooltip.
+		script#card-template(type='text/x-handlebars-template').
+			<div class="modalDialog expand" data-id={{modalId}}>
+			<div class="modal-header">
+			<h5 class="card-title">{{title}}</h5>
+			<div class="btn-group">
+			<button class="mark-card-btn" title="Mark">
+			<img src="/assets/img/Star.png">
+			</button>
+			<button class="compress-card-btn" title="Compress"><img src="/assets/img/Resize.png"></button>
+			<button class="close-card-btn" title="Close"><img src="/assets/img/x.png"></button>
+			</div>
+			</div>
+			<hr class="card-separator">
+			<div class="card-body">
+			<div class="modal-img">
+			<img class="modal-img" src="{{imageSrc}}">
+			</div>
+			<div class = "scroll-desc">
+			<p class="card-desc">{{desc}}</p>
+			</div>
+			</div>
+			<a href={{url}} target="_blank" class="tell-more-btn" title="Tell Me More"><span>go to site > </span></a>
+			</div>
+		// T O O L T I P
+		script#tooltip-template(type='text/x-handlebars-template').
+			<div class="tooltip toggle" data-id={{modalId}}>
+			<div class="tooltip-body">
+			<div class="tooltip-img">
+			<img width = "45" height = "45" src="{{imageSrc}}">
+			</div>
+			<h5 class="tooltip-subtitle">{{title}}</h5>
+			<p class="tooltip-desc">{{desc}}</p>
+			</div>
+			</div>
+		script(type='text/javascript').
+			function onFileSelected(event,id) {
+			var selectedFile = event.target.files[0];
+			var reader = new FileReader();
+			var imgtag = document.getElementById(id);
+			imgtag.title = selectedFile.name;
+			reader.onload = function(event) {
+			imgtag.src = event.target.result;
+			};
+			reader.readAsDataURL(selectedFile);
+			}
+			$("#modalMarked").draggable({
+			handle: ".modal-header"
+			});
+		script(src='/js/core/utils.js', type='text/javascript')
+		script(src='/js/core/TreeManager.js', type='text/javascript')
+		script(src='/js/core/sounds.js', type='text/javascript')
+		script(src='/js/core/globals.js', type='text/javascript')
+		script(src='/js/core/searcher.js', type='text/javascript')
+		script(src='/js/core/Commander.js', type='text/javascript')
+		script(src='/js/core/connect.js', type='text/javascript')
+		script(src='/js/core/bringToFront.js', type='text/javascript')
+		script(src='/js/core/mark.js', type='text/javascript')
+		script(src='/js/core/stub.js', type='text/javascript')
+		script(src='/js/core/api.js', type='text/javascript')
+		script(src='/js/core/color.js', type='text/javascript')
+		script(src='/js/core/Rotation.js', type='text/javascript')
+		script(src='/js/core/Graphic.js', type='text/javascript')
+		script(src='/js/core/selection.js', type='text/javascript')
+		script(src='/js/core/Taxon.js', type='text/javascript')
+		script(src='/js/core/ficha.js', type='text/javascript')
+		script(src='/js/core/init.js', type='text/javascript')

@@ -1,0 +1,125 @@
+Atelopus chiriquiensis
+	http://media.eol.org/content/2013/03/26/11/87696_orig.jpg
+	Información
+	http://eol.org/data_objects/13115778
+	INBIO.
+Agalychnis saltator
+	http://www2.inbio.ac.cr/QR-cal2012/junio13.html
+Bolitoglossa diminuta
+	EOL -> Solo Mapa
+	wikispecies -> No hay ninguna imagen.
+Bolitoglossa epimela
+	EOL -> No hay ninguna imagen.
+	wikispecies -> No hay ninguna imagen.
+Bolitoglossa lignicolor
+	http://media.eol.org/content/2011/08/11/14/64945_orig.jpg
+		Fuente Inbio.
+		Fotografo. Angel Solis
+Bolitoglossa marmorea
+	http://calphotos.berkeley.edu/cgi/img_query?enlarge=1111+1111+1111+9210
+		Copy Right
+		(No descargué la imagen).
+	http://eol.org/data_objects/26105404
+		Museum of Comparative Zoology, Harvard
+Bolitoglossa minutula
+	http://media.eol.org/content/2011/02/12/03/88621_orig.jpg
+	http://eol.org/data_objects/26106247
+	(No la reemplace, es una foto de la autocia).
+Bolitoglossa sooyorum
+	http://calphotos.berkeley.edu/cgi/img_query?enlarge=1111+1111+1111+6552
+		Copy Right
+		(No descargué la imagen).
+	http://eol.org/data_objects/26106252
+	http://media.eol.org/content/2011/02/12/03/48294_orig.jpg
+		Si la tomé puesto que habia un mapa
+Bolitoglossa striatula
+	http://media.eol.org/content/2013/10/22/12/75811_orig.jpg
+		INBIO
+Chaunus marinus
+	http://media.eol.org/content/2011/08/11/14/67496_orig.jpg
+		INBIO
+Craugastor angelicus
+	http://eol.org/data_objects/13118508
+		INBIO
+Craugastor cuaquero
+	No hay imagen
+Craugastor escoces
+	http://www.csmonitor.com/Science/2015/1022/14-animals-declared-extinct-in-the-21st-century/Heredia-Robber-Frog-Craugastor-escoces-2004
+	(Fuente no confiable)
+Craugastor gollmeri
+	http://eol.org/data_objects/13118468
+	http://media.eol.org/content/2011/08/11/14/66156_orig.jpg
+		INBIO
+Craugastor megacephalus
+	http://eol.org/data_objects/25775079
+	http://media.eol.org/content/2011/11/01/20/52856_orig.jpg
+		Flickr: EOL Images
+Craugastor mimus
+	http://eol.org/data_objects/13118461
+	http://media.eol.org/content/2011/08/11/14/56651_orig.jpg
+		INBIO
+Craugastor noblei
+	http://eol.org/data_objects/12580028
+	http://media.eol.org/content/2011/06/24/13/85433_orig.jpg
+		Amphibians of Panama
+Craugastor persimilis
+	http://eol.org/data_objects/26105421
+	http://media.eol.org/content/2011/02/12/03/86974_orig.jpg
+		Museum of Comparative Zoology, Harvard
+Craugastor phasma
+	Mapa
+Craugastor polyptychus
+	http://eol.org/data_objects/27730713
+	http://media.eol.org/content/2013/11/24/22/20922_orig.jpg
+			Wikimedia Commons
+Craugastor ranoides
+	http://rtpi.org/little-brown-jumper/
+		Fuente no confiable. (Descargada)
+Craugastor rhyacobatrachus
+	No hay imagen.
+Craugastor rugosus
+	Deje la misma del INBIO
+Diasporus tigrillo
+	http://eol.org/data_objects/27235204
+	http://media.eol.org/content/2013/12/07/07/14874_orig.jpg
+		Wikimedia Commons
+		PODEMOS EDITARLA :)
+Isthmohyla calypsa
+	http://eol.org/data_objects/12581121
+	http://media.eol.org/content/2011/06/24/14/87771_orig.jpg
+		 Amphibians of Panama
+Leptodactylus savagei
+	Servidor del INBIO abajo
+	http://eol.org/data_objects/25780401
+	http://media.eol.org/content/2016/08/11/18/24012_orig.jpg
+		También bajé esta.
+		Flickr: EOL Images
+Nototriton gamezi
+	http://eol.org/data_objects/13161840
+	http://media.eol.org/content/2011/10/06/07/33067_orig.jpg
+		CalPhotos
+		Fotografo:Sean Rovito
+Nototriton guanacaste
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Nototriton major
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Nototriton picadoi
+	http://eol.org/data_objects/18175974
+	http://media.eol.org/content/2012/01/28/05/58938_orig.jpg
+		Museum of Comparative Zoology, Harvard
+Nototriton richardi
+	http://www.naturalista.mx/taxa/27631-Nototriton-richardi
+		Derechos Reversados.
+Nototriton tapanti
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Oedipina altura
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Oedipina cyclocauda
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Oedipina paucidentata
+	No se encontró imagen en EOL, ni en Wiki, ni en inaturalist
+Sachatamia ilex
+	http://eol.org/data_objects/33161738
+	http://media.eol.org/content/2011/10/06/09/97935_orig.jpg
+		CalPhotos
+			Tobias Eisenberg

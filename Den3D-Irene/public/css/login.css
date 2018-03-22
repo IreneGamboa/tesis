@@ -1,0 +1,92 @@
+.bodyForm{
+	background-color: #393939;
+	margin: 20px,2%,2%,20px;
+	height: 90%;
+	overflow: hidden;
+}
+.bodyForm form{
+	padding-top: 25%;
+	padding-left: 15%;
+	width: 100%;
+	height: 800px;
+
+}
+.title{
+	width: 100%;
+	font-family: "century gothic";
+	font-size: 36px;
+	color: #FFFFFF;
+	padding-left: 16%;
+	padding-right: 30%;
+	text-align: center;
+}
+.row{
+	height: 100vh;
+}
+
+.box{
+	font-family: "century gothic";
+	font-size: 15px;
+	color: #B2B2B2;
+	width: 90%;
+	height: 27.5px;
+	background-color: #4C4C4C;
+	border: none;
+	margin-top: 27.5px;
+	padding-left: 10px;
+}
+.box-md{
+	font-family: "century gothic";
+	font-size: 15px;
+	color: #B2B2B2;
+	background-color: #4C4C4C;
+	border: none;
+	width: 44%;
+	margin-top: 30px;
+	padding-left: 10px;
+}
+.line{
+	margin-bottom: 0px;
+	margin-bottom: 0px;
+	width: 100%;
+}
+.submit{
+	background-color: #27AAD8;
+	text-align: center;
+	width: 90%;
+	height: 40px;
+	font-family: "century gothic";
+	font-size: 30px;
+	color: #FFFFFF;
+	margin-top: 40px;
+}
+#sendLogin,#sendAccount{
+	visibility: hidden;
+}
+.footer{
+	background-color: #4C4C4C;
+	height: 10%;
+	padding-left: 15%;
+}
+.footer label{
+	font-family: "century gothic";
+	font-size: 15px;
+	text-align: center;
+	padding-left: 10px;
+}
+.linkLogin{
+	color:#27AAD8;
+}
+.linkLogin:hover{
+	color:#B2B2B2;
+}
+.col-md-8,.col-md-4{
+	padding-left: 0px;
+	padding-right: 0px;
+}
+#loading-indicator {
+  position: absolute;
+  left: 50%;
+  top: 30%;
+  z-index: 4;
+}

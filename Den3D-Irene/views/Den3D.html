@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Den3D</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <script src="/js/handlebars-v3.0.3.js"></script>
+    <script src="/js/jquery-1.9.1.js"></script>
+    <script src="/js/jquery-ui.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="/css/font-awesome.min.css">
+    <!-- Latest compiled and minified CSS-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <!-- Latest compiled and minified JavaScript-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <!-- AJAX for modal-->
+    <link rel="stylesheet" type="text/css" href="/css/styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootbox.js/4.4.0/bootbox.min.js"></script>
+  </head>
+  <!-- Incluir librerias exteriores-->
+  <script src="/js/three.min.js"></script>
+  <script src="/js/Detector.js"></script>
+  <script src="/js/Stats.js"></script>
+  <script src="/js/OrbitControls.js"></script>
+  <script src="/js/THREEx.KeyboardState.js"></script>
+  <script src="/js/THREEx.FullScreen.js"></script>
+  <script src="/js/THREEx.WindowResize.js"></script>
+  <script src="/js/renderers/Projector.js"></script>
+  <script src="/js/renderers/CanvasRenderer.js"></script>
+  <script src="/js/libs/stats.min.js"></script>
+  <script src="/js/libs/tween.min.js"></script>
+  <script src="/fonts/helvetiker_regular.typeface.js"></script>
+  <script src="/fonts/helvetiker_bold.typeface.js"></script>
+  <!-- -->
+  <script type="text/javascript" src="/js/DAT.GUI.min.js"></script>
+  <!-- jQuery code to display an information button and box when clicked.-->
+  <link rel="stylesheet" href="/css/jquery-ui.css">
+  <link rel="stylesheet" href="/css/info.css">
+  <script src="/js/info.js"></script>
+  <link rel="stylesheet" type="text/css" href="/css/index.css">
+  <body>
+    <!-- Form Docx-->
+    <form id="generacion" action="/core/makeSumary" method="post">
+      <input id="idDocx" type="hidden" name="idElement" value="">
+    </form>
+    <!-- Modal Trees-->
+    <div id="modalShowTrees" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade bs-example-modal-lg">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            <h4 id="myModalLabel" class="modal-title">My Trees</h4>
+          </div>
+          <div class="modal-body">
+            <h1 class="titleTrees">Choose your tree</h1>
+            <ul class="listTrees">
+              <li class="itemTree">
+                <img src="/images/Agalychnis lemur.jpg" alt="Cinque Terre" height="50px" class="img-circle imgTree"><span>Ranas verdes</span>
+              </li>
+              <li class="itemTree">
+                <img src="/images/Bolitoglossa alvaradoi.jpg" alt="Cinque Terre" height="50px" class="img-circle imgTree"><span>Salamandra</span>
+              </li>
+              <li class="itemTree">
+                <img src="/images/Dermophis glandulosus.jpg" alt="Cinque Terre" height="50px" class="img-circle imgTree"><span>Lombrices de tierra</span>
+              </li>
+              <li class="itemTree">
+                <img src="/images/Dendrobates pumilio.jpg" alt="Cinque Terre" height="50px" class="img-circle imgTree"><span>Ranas Venenosas</span>
+              </li>        
+            </ul>
+            <div class="row">
+                <div class="col-12 submit" style="margin-left: 30%; float: left; marging-">
+                  <label for="submitCreate">Open</label>
+                </div>
+                
+            </div>
+            
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Update Node--><img id="loading-indicator" src="/assets/img/clock.gif" style="display:none">
+    <div id="modelUpdateNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade bs-example-modal-lg">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            <h4 id="myModalLabel" class="modal-title">Update Node</h4>
+          </div>
+          <div class="modal-body">
+            <form id="updateNode">
+              <div class="row">
+                <div class="col-sm-4"><img id="imageUpdate" src="/images/Anfibios.jpg" class="img-circle">
+                  <label for="fileCreateUpdate" class="labelFile">Choose File</label>
+                  <input id="fileCreateUpdate" type="file" name="upl" accept="image/*" onchange="onFileSelected(event,&quot;imageUpdate&quot;)" class="inputFile">
+                </div>
+                <div class="col-sm-8">
+                  <input id="validNameUpdate" name="validName" type="text" placeholder="Valid Name">
+                  <textarea id="descriptionUpdate" name="description" placeholder="Description:" rows="4" class="form-control"></textarea>
+                  <input id="urlUpdate" name="url" type="text" placeholder="url">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="subTitle">Add children:</label>
+                </div>
+                <div class="col-sm-8">
+                  <div class="form-footer">
+                    <div class="buttons">
+                      <button id="btn-less-Update" type="button">  -</button>
+                      <input id="numberChildrenUpdate" name="numberChildren" placeholder="0">
+                      <button id="btn-more-Update" type="button">  +</button>
+                    </div>
+                    <div class="submit">
+                      <label for="submitUpdate">Update node</label>
+                    </div>
+                    <input id="submitUpdate" type="submit">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal-->
+    <div id="modelNewNode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade bs-example-modal-lg">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content bform">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            <h4 id="myModalLabel" class="modal-title">Create New Tree</h4>
+          </div>
+          <div class="modal-body">
+            <!-- <form method="POST" action="http://192.168.0.21:3030/taxon/file_upload" enctype="multipart/form-data" name="newNode">-->
+            <form id="newNode">
+              <div class="row">
+                <div class="col-sm-4"><img id="myimage" src="/images/rana.jpg" class="img-circle">
+                  <label for="fileCreateNN" class="labelFile">Choose File</label>
+                  <input id="fileCreateNN" type="file" name="upl" accept="image/*" onchange="onFileSelected(event,&quot;myimage&quot;)" class="inputFile">
+                </div>
+                <div class="col-sm-8">
+                  <input id="validNameNN" name="validName" type="text" placeholder="Valid Name">
+                  <textarea id="descriptionNN" name="description" placeholder="Description:" rows="4" class="form-control"></textarea>
+                  <input id="urlNN" name="url" type="text" placeholder="url">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="subTitle">Number of Children:</label>
+                </div>
+                <div class="col-sm-8">
+                  <div class="form-footer">
+                    <div class="buttons">
+                      <button id="btn-less-create" type="button">-</button>
+                      <input id="numberChildren" name="numberChildren" type="text" placeholder="0">
+                      <button id="btn-more-create" type="button">+</button>
+                    </div>
+                    <div class="submit">
+                      <label for="submitCreate">Create New Tree</label>
+                    </div>
+                    <input id="submitCreate" type="submit">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal Update Node-->
+
+    <!-- Modal Add Right-->
+    <div id="modelAddRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" class="modal fade bs-example-modal-lg">
+      <div role="document" class="modal-dialog modal-lg">
+        <div class="modal-content bform">
+          <div class="modal-header">
+            <button type="button" data-dismiss="modal" aria-label="Close" class="close"><span aria-hidden="true">×</span></button>
+            <h4 id="myModalLabel" class="modal-title">Add node to the right of node</h4>
+          </div>
+          <div class="modal-body">
+            <!-- <form method="POST" action="http://192.168.0.21:3030/taxon/file_upload" enctype="multipart/form-data" name="newNode">-->
+            <form id="newNodeRight">
+              <div class="row">
+                <div class="col-sm-4"><img id="myimage2" src="/images/rana.jpg" class="img-circle">
+                  <label for="fileCreateNNR" class="labelFile">Choose File</label>
+                  <input id="fileCreateNNR" type="file" name="upl" accept="image/*" onchange="onFileSelected(event,&quot;myimage2&quot;)" class="inputFile">
+                </div>
+                <div class="col-sm-8">
+                  <input id="validNameNNR" name="validName" type="text" placeholder="Valid Name">
+                  <textarea id="descriptionNNR" name="description" placeholder="Description:" rows="4" class="form-control"></textarea>
+                  <input id="urlNNR" name="url" type="text" placeholder="url">
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-sm-4">
+                  <label class="subTitle">Number of Children:</label>
+                </div>
+                <div class="col-sm-8">
+                  <div class="form-footer">
+                    <div class="buttons">
+                      <button id="btn-less-createR" type="button">-</button>
+                      <input id="numberChildrenNNR" name="numberChildren" type="text" placeholder="0">
+                      <button id="btn-more-createR" type="button">+</button>
+                    </div>
+                    <div class="submit">
+                      <label for="submitCreate2">Create New Tree</label>
+                    </div>
+                    <input id="submitCreate2" type="submit">
+                  </div>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="Den3D">
+      <p href="#demo" data-toggle="collapse"><span>Den 3D<span class="glyphicon glyphicon-chevron-down"></span></span></p>
+      <ul id="demo" class="collapse">
+        <li>
+          <div data-toggle="collapse" data-target="#edit" class="row">
+            <div style="margin-left: 15px;" class="col-md-2"><img src="/assets/img/Lapiz.png" class="imgDen3D"></div>
+            <div class="col-md-7 textDen3D">Edit</div>
+            <div class="col-md-2 textDen3D"><span class="glyphicon glyphicon-chevron-down"></span></div>
+          </div>
+          <ul id="edit" class="collapse">
+            <li onmouseover="hoverItem(this,&quot;../assets/img/New node Blue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/New Node.png&quot;)">
+              <p id="newNodeSpan"><img src="/assets/img/New Node.png">                New tree</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/New node Blue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/New Node.png&quot;)">
+              <p id="addRight"><img src="/assets/img/New Node.png">                Add node to the right</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/UpdateBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/Update.png&quot;)">
+              <p id="updateNodeSpan"><img src="/assets/img/Update.png">                Update node</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/snipBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/snip.png&quot;)">
+              <p id="snipNodeSpan"><img src=" /assets/img/snip.png">                Snip tree</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/pruneBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/prune.png&quot;)">
+              <p id="pruneNodeSpan"><img src="/assets/img/prune.png">                Prune tree</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/LinkBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/Link.png&quot;)">
+              <p id="linkNodeSpan"><img src="/assets/img/Link.png">                Link tree to node</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/LinkBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/Link.png&quot;)">
+              <p id="linkRight"><img src="/assets/img/Link.png">                Link tree to the right of node</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/changeBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/change.png&quot;)">
+              <p id="changeNodeSpan"><img src="/assets/img/change.png">                Bring tree</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/swapBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/swap.png&quot;)">
+              <p id="swapNodeSpan"><img src="/assets/img/swap.png">                Swap trees</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/DeleteBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/Delete.png&quot;)">
+              <p id="deleteNodeSpan"><img src="/assets/img/Delete.png">                Delete tree</p>
+            </li>
+            <li onmouseover="hoverItem(this,&quot;../assets/img/undoBlue.png&quot;)" onmouseout="hoverItem(this,&quot;../assets/img/undo.png&quot;)">
+              <p id="UndoSpan"><img src="/assets/img/undo.png">                Undo</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <!-- <p data-toggle="collapse" data-target="#seachSpam"><img src="../assets/img/Lupa.png">Search<span class="glyphicon glyphicon-chevron-down"></span></p>-->
+          <div data-toggle="collapse" data-target="#seachSpam" class="row">
+            <div style="margin-left: 15px;" class="col-md-2"><img src="/assets/img/Lupa.png" class="imgDen3D"></div>
+            <div class="col-md-7 textDen3D">Search</div>
+            <div class="col-md-2 textDen3D"><span class="glyphicon glyphicon-chevron-down"></span></div>
+          </div>
+          <div id="seachSpam" class="collapse">
+            <div class="search">
+              <input id="search" type="text" placeholder="Search" class="search">
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio" id="radioValidName" checked="true" onClick="clickRadioValidName(this)">By valid name
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio" id="radioCommonName" onClick="clickRadioCommonName(this)">By common name
+              </label>
+            </div>
+            <div class="radio">
+              <label>
+                <input type="radio" name="optradio" id="radioDescription" onClick="clickRadioDescription(this)">By description
+              </label>
+            </div>
+          </div>
+        </li>
+         <li>
+          <div data-toggle="collapse" data-target="#Taxonomies" class="row">
+            <div style="margin-left: 15px;" class="col-md-2"><img src="/assets/img/Bosque.png" class="imgDen3D"></div>
+            <div class="col-md-7 textDen3D">Taxonomies</div>
+            <div class="col-md-2 textDen3D"><span class="glyphicon glyphicon-chevron-down"></span></div>
+          </div>
+          <ul id="Taxonomies" class="collapse">
+            <li  data-target="#modalShowTrees" data-toggle="modal">
+              <p  id="publicTrees">Public Trees</p>
+            </li>
+            <li  data-target="#modalShowTrees" data-toggle="modal">
+              <p id="myTrees">My Trees</p>
+            </li>
+          </ul>
+        </li>
+        <li>
+          <!-- <p id="reportSpan">Report</p>-->
+          <div id="reportSpan" class="row">
+            <div style="margin-left: 15px;" class="col-md-2"><img src="/assets/img/Document.png" class="imgDen3D"></div>
+            <div class="col-md-7 textDen3D">Report</div>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="user">
+      <div class="userImage"><span><img src="/assets/img/Username.png" width="45px" alt="User" class="img-circle"><span id="userName">1@1</span></span></div>
+    </div>
+    <div class="forestBar"><img src="/assets/img/Bosque.png" href="#forestBar" data-toggle="collapse">
+      <ul id="forestBar" class="collapse">
+        <li><img src="/assets/img/Icono 1.png" alt="Cinque Terre" height="50px" class="img-circle"><span>Nombre del node</span></li>
+        <li><img src="/assets/img/Icono 1.png" alt="Cinque Terre" height="50px" class="img-circle"><span>Nombre del node</span></li>
+        <li><img src="/assets/img/Icono 1.png" alt="Cinque Terre" height="50px" class="img-circle"><span>Nombre del node</span></li>
+      </ul>
+    </div>
+    <div id="ThreeJS" style="position:relative" class="ThreeJS">
+      <div class="card-container">
+        <!--Aqui es donde aparecen las fichas.
+        -->
+      </div>
+      <div class="mark-container">
+        <div id="markedItems" style="display: none;" class="modalDialog-mark expand">
+          <div class="modal-header-mark">
+            <h5 class="card-title-mark">Marked items</h5>
+            <div class="btn-group-mark">
+              <button id="closeMark" title="Close" class="close-card-btn-mark"><img src="/assets/img/x.png"></button>
+            </div>
+          </div>
+          <hr class="card-separator-mark">
+          <div class="card-body-mark">
+            <div class="scroll-desc-mark">
+              <ul id="itemsMarked" class="listItems">
+                <li>it1</li>
+                <li>it2</li>
+                <li>...</li>
+                <li>itn</li>
+              </ul>
+            </div>
+          </div>
+          <div class="footer-button">
+            <button id="upItem" onclick="upItem()" title="Up" class="footer-button"><img src="/assets/img/up.png"></button>
+            <button id="downItem" onclick="downItem()" title="Down" class="footer-button"><img src="/assets/img/down.png"></button>
+            <button onclick="sortAlphabetic()" title="Alphabetic" class="footer-button"><img src="/assets/img/AZ.png"></button>
+            <button onclick="sortCrono()" title="Chronologically" class="footer-button"><img src="/assets/img/Clock.png"></button>
+            <button onclick="generarDocx()" title="Generate" class="footer-button"><img src="/assets/img/Document.png"></button>
+            <button id="deleteItem" onclick="deleteItem()" title="Delete" class="footer-button"><img src="/assets/img/Delete.png"></button>
+          </div>
+        </div>
+        <div id="searchModal" style="display: none;" class="modalDialog-mark expand">
+          <div class="modal-header-mark">
+            <h5 class="card-title-mark">Search results </h5>
+            <div class="btn-group-mark">
+              <button id="closeSearch" title="Close" class="close-card-btn-mark"><img src="/assets/img/x.png"></button>
+            </div>
+          </div>
+          <hr class="card-separator-mark">
+          <div class="card-body-mark">
+            <div class="scroll-desc-mark">
+              <ul id="itemsSearch" class="listItems"></ul>
+            </div>
+          </div>
+          <div style="background-color:#3F3F3F" class="footer-button">
+            <spam id="btn-open-bc" class="labelFile">Open baseball Card      </spam>
+          </div>
+        </div>
+      </div>
+      <div id="tooltip" class="tooltip-container">
+        <!--Aqui es donde aparece el tooltip.
+        -->
+      </div>
+    </div>
+    <script id="card-template" type="text/x-handlebars-template">
+      <div class="modalDialog expand" data-id={{modalId}}>
+      <div class="modal-header">
+      <h5 class="card-title">{{title}}</h5>
+      <div class="btn-group">
+      <button class="mark-card-btn" title="Mark">
+      <img src="/assets/img/Star.png">
+      </button>
+      <button class="compress-card-btn" title="Compress"><img src="/assets/img/Resize.png"></button>
+      <button class="close-card-btn" title="Close"><img src="/assets/img/x.png"></button>
+      </div>
+      </div>
+      <hr class="card-separator">
+      <div class="card-body">
+      <div class="modal-img">
+      <img class="modal-img" src="{{imageSrc}}">
+      </div>
+      <div class = "scroll-desc">
+      <p class="card-desc">{{desc}}</p>
+      </div>
+      </div>
+      <a href={{url}} target="_blank" class="tell-more-btn" title="Tell Me More"><span>go to site > </span></a>
+      </div>
+    </script>
+    <!-- T O O L T I P-->
+    <script id="tooltip-template" type="text/x-handlebars-template">
+      <div class="tooltip toggle" data-id={{modalId}}>
+      <div class="tooltip-body">
+      <div class="tooltip-img">
+      <img width = "45" height = "45" src="{{imageSrc}}">
+      </div>
+      <h5 class="tooltip-subtitle">{{title}}</h5>
+      <p class="tooltip-desc">{{desc}}</p>
+      </div>
+      </div>
+    </script>
+    <script type="text/javascript">
+      function onFileSelected(event,id) {
+      var selectedFile = event.target.files[0];
+      var reader = new FileReader();
+      var imgtag = document.getElementById(id);
+      imgtag.title = selectedFile.name;
+      reader.onload = function(event) {
+      imgtag.src = event.target.result;
+      };
+      reader.readAsDataURL(selectedFile);
+      }
+      $("#modalMarked").draggable({
+      handle: ".modal-header"
+      });
+    </script>
+    <script src="/js/core/utils.js"  type="text/javascript">  </script>
+    <script src="/js/core/TreeManager.js" type="text/javascript">  </script>
+    <script src="/js/core/sounds.js"  type="text/javascript">  </script>
+    <script src="/js/core/globals.js"  type="text/javascript">  </script>
+    <script src="/js/core/searcher.js"  type="text/javascript">  </script>
+    <script src="/js/core/Commander.js"  type="text/javascript">  </script>
+    <script src="/js/core/connect.js"  type="text/javascript">  </script>
+    <script src="/js/core/bringToFront.js"  type="text/javascript">  </script>
+    <script src="/js/core/mark.js"  type="text/javascript">  </script>
+
+    <script src="/js/core/stub.js"  type="text/javascript">  </script>
+    <script src="/js/core/api.js"  type="text/javascript">  </script>
+    <script src="/js/core/color.js"  type="text/javascript">  </script>
+    <script src="/js/core/Rotation.js"  type="text/javascript">  </script>
+    <script src="/js/core/Graphic.js"  type="text/javascript">  </script>
+    <script src="/js/core/selection.js"  type="text/javascript">  </script>
+    <script src="/js/core/Taxon.js" type="text/javascript">  </script>
+    <script src="/js/core/ficha.js" type="text/javascript">  </script>
+    <script src="/js/core/init.js"  type="text/javascript">  </script>
+  </body>
+</html>

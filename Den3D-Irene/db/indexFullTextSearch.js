@@ -1,0 +1,1 @@
+db.taxonomicranks.createIndex( { "validName": "text" } );

@@ -1,0 +1,150 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0')
+    script(src='/js/jquery-1.9.1.js')
+    script(src='/js/jquery-ui.js')
+    link(rel='stylesheet', type='text/css', href='/css/font-awesome.min.css')
+    // Latest compiled and minified CSS
+    link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css')
+    link(rel='stylesheet', type='text/css', href='/css/login.css')
+    // Latest compiled and minified JavaScript
+    script(src='https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js')
+    script(src='/js/jquery.validate.min.js')
+    title Den 3D Login
+  body
+    img#loading-indicator(src='/assets/img/clock.gif', style='display:none')
+    .row
+      .col-md-4(style='height:100%')
+        #scroll.bodyForm
+          form#login(name='Login')
+            label.title Login
+            input.box(type='text', placeholder='Email', name='email')
+            input.box(type='password', placeholder='Password', name='password')
+            label.submit(for='sendLogin') Login
+            input#sendLogin(type='submit')
+          form#create(name='registration')
+            label.title Sign Up
+            input.box-md(type='text', placeholder='Name', name='name')
+            input.box-md(type='text', placeholder='Last Name', name='lastName', style='margin-left:1%')
+            input.box(type='text', placeholder='Email', name='email')
+            input.box(type='password', placeholder='Password', name='password')
+            input.box(type='password', placeholder='Retype', name='repeatPassword')
+            label.submit(for='sendAccount') Create account
+            input#sendAccount(type='submit')
+        .footer
+          label(style='color:#B2B2B2') Create a member?
+          label#labelLogin.linkLogin(onclick='down();') Sign Up
+      .col-md-8(style='height:100%')
+  script(type='text/javascript').
+    $(document).ajaxSend(function(event, request, settings) {
+    $('#loading-indicator').show();
+    });
+    $(document).ajaxComplete(function(event, request, settings) {
+    $('#loading-indicator').hide();
+    });
+    function down () {
+    var label = $('#labelLogin');
+    if (label.html() == 'Sign Up') {
+    label.text('Login');
+    } else{
+    label.text('Sign Up');
+    };
+    $('#scroll').animate({
+    scrollTop: $('#create').offset().top
+    }, 1000);
+    }
+    $.validator.setDefaults({
+    highlight: function(element) {
+    $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function(element) {
+    $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block',
+    errorPlacement: function(error, element) {
+    if(element.parent('.input-group').length) {
+    error.insertAfter(element.parent());
+    } else {
+    error.insertAfter(element);
+    }
+    }
+    });
+    $(function() {
+    $("form[name='Login']").validate({
+    // Specify validation rules
+    rules: {
+    email: {
+    required: true,
+    email: true
+    },
+    password: {
+    required: true,
+    minlength: 4
+    }
+    },
+    messages: {
+    password: {
+    required: "Please provide a password",
+    minlength: "Your password must be at least 5 characters long"
+    },
+    email: "Please enter a valid email address"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+    //form.submit();
+    $.ajax({
+    type: "POST",
+    url: "/users/login",
+    data: $("form[name='Login']").serialize(),
+    success: function (data) {
+    window.location.href="/";
+    }
+    });
+    }
+    });
+    $("form[name='registration']").validate({
+    // Specify validation rules
+    rules: {
+    name:"required",
+    lastName:"required",
+    email: {
+    required: true,
+    email: true
+    },
+    password: {
+    required: true,
+    minlength: 4
+    },
+    password_again: {
+    equalTo: "#password"
+    }
+    },
+    messages: {
+    password: {
+    required: "Please provide a password",
+    minlength: "Your password must be at least 4 characters long"
+    },
+    passwordAgain:"The password does not mach",
+    email: "Please enter a valid email address",
+    name: "Please enter your name"
+    },
+    // Make sure the form is submitted to the destination defined
+    // in the "action" attribute of the form when valid
+    submitHandler: function(form) {
+    $.ajax({
+    type: "POST",
+    url: "/users/signup",
+    data: $("form[name='registration']").serialize(),
+    success: function (data) {
+    window.location.href="/";
+    console.log()
+    }
+    });
+    //return false; // required to block normal submit since you used ajax
+    }
+    });
+    });

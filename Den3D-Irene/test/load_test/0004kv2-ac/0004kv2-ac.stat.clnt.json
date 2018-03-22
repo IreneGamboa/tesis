@@ -1,0 +1,127 @@
+{
+    "A": {
+        "A": {
+            "avgTimeResMs": 289.6666666666667,
+            "minTimeResMs": 238,
+            "maxTimeResMs": 333
+        },
+        "A1": {
+            "count": 1,
+            "avgTimeResMs": 333,
+            "minTimeResMs": 333,
+            "maxTimeResMs": 333
+        },
+        "A2": {
+            "count": 1,
+            "avgTimeResMs": 268,
+            "minTimeResMs": 268,
+            "maxTimeResMs": 268
+        },
+        "A3": {
+            "count": 1,
+            "avgTimeResMs": 238,
+            "minTimeResMs": 238,
+            "maxTimeResMs": 238
+        }
+    },
+    "B": {
+        "B": {
+            "avgTimeResMs": 936.2333333333335,
+            "minTimeResMs": 225,
+            "maxTimeResMs": 1693
+        },
+        "B1": {
+            "count": 10,
+            "avgTimeResMs": 1127.9,
+            "minTimeResMs": 288,
+            "maxTimeResMs": 1693
+        },
+        "B2": {
+            "count": 10,
+            "avgTimeResMs": 840.4,
+            "minTimeResMs": 231,
+            "maxTimeResMs": 1456
+        },
+        "B3": {
+            "count": 10,
+            "avgTimeResMs": 852.7,
+            "minTimeResMs": 225,
+            "maxTimeResMs": 1483
+        }
+    },
+    "C": {
+        "C": {
+            "avgTimeResMs": 2223.3666666666663,
+            "minTimeResMs": 211,
+            "maxTimeResMs": 4271
+        },
+        "C1": {
+            "count": 30,
+            "avgTimeResMs": 2267.9666666666667,
+            "minTimeResMs": 244,
+            "maxTimeResMs": 4271
+        },
+        "C2": {
+            "count": 30,
+            "avgTimeResMs": 2201.0666666666666,
+            "minTimeResMs": 263,
+            "maxTimeResMs": 4186
+        },
+        "C3": {
+            "count": 30,
+            "avgTimeResMs": 2099.3,
+            "minTimeResMs": 211,
+            "maxTimeResMs": 4083.9999999999995
+        }
+    },
+    "D": {
+        "D": {
+            "avgTimeResMs": 6798.873333333333,
+            "minTimeResMs": 213,
+            "maxTimeResMs": 13505
+        },
+        "D1": {
+            "count": 100,
+            "avgTimeResMs": 6817.88,
+            "minTimeResMs": 234,
+            "maxTimeResMs": 13429
+        },
+        "D2": {
+            "count": 100,
+            "avgTimeResMs": 6789.37,
+            "minTimeResMs": 229,
+            "maxTimeResMs": 13505
+        },
+        "D3": {
+            "count": 100,
+            "avgTimeResMs": 6746,
+            "minTimeResMs": 213,
+            "maxTimeResMs": 13380
+        }
+    },
+    "E": {
+        "E": {
+            "avgTimeResMs": 20584.154444444444,
+            "minTimeResMs": 198,
+            "maxTimeResMs": 46808
+        },
+        "E1": {
+            "count": 300,
+            "avgTimeResMs": 20569.843333333334,
+            "minTimeResMs": 230,
+            "maxTimeResMs": 40852
+        },
+        "E2": {
+            "count": 300,
+            "avgTimeResMs": 20591.31,
+            "minTimeResMs": 198,
+            "maxTimeResMs": 41546
+        },
+        "E3": {
+            "count": 300,
+            "avgTimeResMs": 23675.92,
+            "minTimeResMs": 301,
+            "maxTimeResMs": 46808
+        }
+    }
+}

@@ -1,0 +1,98 @@
+
+
+% B
+
+plot(B1_1_a,'DisplayName','B1_1_a');hold on;plot(B1_2_1,'DisplayName','B1_2_1');plot(B1_2_ac1,'DisplayName','B1_2_ac1');hold off;legend('B1_1_a','B1_2_1','B1_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\B1.png');
+
+plot(B2_1_a,'DisplayName','B2_1_a');hold on;plot(B2_2_1,'DisplayName','B2_2_1');plot(B2_2_ac1,'DisplayName','B2_2_ac1');hold off;legend('B2_1_a','B2_2_1','B2_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\B2.png');
+
+plot(B3_1_a,'DisplayName','B3_1_a');hold on;plot(B3_2_1,'DisplayName','B3_2_1');plot(B3_2_ac1,'DisplayName','B3_2_ac1');hold off;legend('B3_1_a','B3_2_1','B3_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\B3.png');
+
+% C
+
+plot(C1_1_a,'DisplayName','C1_1_a');hold on;plot(C1_2_1,'DisplayName','C1_2_1');plot(C1_2_ac1,'DisplayName','C1_2_ac1');hold off;legend('C1_1_a','C1_2_1','C1_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\C1.png');
+
+plot(C2_1_a,'DisplayName','C2_1_a');hold on;plot(C2_2_1,'DisplayName','C2_2_1');plot(C2_2_ac1,'DisplayName','C2_2_ac1');hold off;legend('C2_1_a','C2_2_1','C2_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\C2.png');
+
+plot(C3_1_a,'DisplayName','C3_1_a');hold on;plot(C3_2_1,'DisplayName','C3_2_1');plot(C3_2_ac1,'DisplayName','C3_2_ac1');hold off;legend('C3_1_a','C3_2_1','C3_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\C3.png');
+
+% D
+
+
+plot(D1_1_a,'DisplayName','D1_1_a');hold on;plot(D1_2_1,'DisplayName','D1_2_1');plot(D1_2_ac1,'DisplayName','D1_2_ac1');hold off;legend('D1_1_a','D1_2_1','D1_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\D1.png');
+
+plot(D2_1_a,'DisplayName','D2_1_a');hold on;plot(D2_2_1,'DisplayName','D2_2_1');plot(D2_2_ac1,'DisplayName','D2_2_ac1');hold off;legend('D2_1_a','D2_2_1','D2_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\D2.png');
+
+plot(D3_1_a,'DisplayName','D3_1_a');hold on;plot(D3_2_1,'DisplayName','D3_2_1');plot(D3_2_ac1,'DisplayName','D3_2_ac1');hold off;legend('D3_1_a','D3_2_1','D3_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\D3.png');
+
+% E
+
+
+plot(E1_1_a,'DisplayName','E1_1_a');hold on;plot(E1_2_1,'DisplayName','E1_2_1');plot(E1_2_ac1,'DisplayName','E1_2_ac1');hold off;legend('E1_1_a','E1_2_1','E1_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\E1.png');
+
+plot(E2_1_a,'DisplayName','E2_1_a');hold on;plot(E2_2_1,'DisplayName','E2_2_1');plot(E2_2_ac1,'DisplayName','E2_2_ac1');hold off;legend('E2_1_a','E2_2_1','E2_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\E2.png');
+
+plot(E3_1_a,'DisplayName','E3_1_a');hold on;plot(E3_2_1,'DisplayName','E3_2_1');plot(E3_2_ac1,'DisplayName','E3_2_ac1');hold off;legend('E3_1_a','E3_2_1','E3_2_ac1');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots1\E3.png');
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
+% B
+
+plot(B1_2_1,'DisplayName','B1_2_1');hold on;plot(B1_2_ac1,'DisplayName','B1_2_ac1');plot(B1_2_ac2p2,'DisplayName','B1_2_ac2p2');hold off;legend('B1_2_1','B1_2_ac1','B1_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\B1.png');
+
+plot(B2_2_1,'DisplayName','B2_2_1');hold on;plot(B2_2_ac1,'DisplayName','B2_2_ac1');plot(B2_2_ac2p2,'DisplayName','B2_2_ac2p2');hold off;legend('B2_2_1','B2_2_ac1','B2_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\B2.png');
+
+plot(B3_2_1,'DisplayName','B3_2_1');hold on;plot(B3_2_ac1,'DisplayName','B3_2_ac1');plot(B3_2_ac2p2,'DisplayName','B3_2_ac2p2');hold off;legend('B3_2_1','B3_2_ac1','B3_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\B3.png');
+
+
+% C
+
+plot(C1_2_1,'DisplayName','C1_2_1');hold on;plot(C1_2_ac1,'DisplayName','C1_2_ac1');plot(C1_2_ac2p2,'DisplayName','C1_2_ac2p2');hold off;legend('C1_2_1','C1_2_ac1','C1_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\C1.png');
+
+plot(C2_2_1,'DisplayName','C2_2_1');hold on;plot(C2_2_ac1,'DisplayName','C2_2_ac1');plot(C2_2_ac2p2,'DisplayName','C2_2_ac2p2');hold off;legend('C2_2_1','C2_2_ac1','C2_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\C2.png');
+
+plot(C3_2_1,'DisplayName','C3_2_1');hold on;plot(C3_2_ac1,'DisplayName','C3_2_ac1');plot(C3_2_ac2p2,'DisplayName','C3_2_ac2p2');hold off;legend('C3_2_1','C3_2_ac1','C3_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\C3.png');
+
+% D
+
+plot(D1_2_1,'DisplayName','D1_2_1');hold on;plot(D1_2_ac1,'DisplayName','D1_2_ac1');plot(D1_2_ac2p2,'DisplayName','D1_2_ac2p2');hold off;legend('D1_2_1','D1_2_ac1','D1_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\D1.png');
+
+plot(D2_2_1,'DisplayName','D2_2_1');hold on;plot(D2_2_ac1,'DisplayName','D2_2_ac1');plot(D2_2_ac2p2,'DisplayName','D2_2_ac2p2');hold off;legend('D2_2_1','D2_2_ac1','D2_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\D2.png');
+
+plot(D3_2_1,'DisplayName','D3_2_1');hold on;plot(D3_2_ac1,'DisplayName','D3_2_ac1');plot(D3_2_ac2p2,'DisplayName','D3_2_ac2p2');hold off;legend('D3_2_1','D3_2_ac1','D3_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\D3.png');
+
+% E
+
+plot(E1_2_1,'DisplayName','E1_2_1');hold on;plot(E1_2_ac1,'DisplayName','E1_2_ac1');plot(E1_2_ac2p2,'DisplayName','E1_2_ac2p2');hold off;legend('E1_2_1','E1_2_ac1','E1_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\E1.png');
+
+plot(E2_2_1,'DisplayName','E2_2_1');hold on;plot(E2_2_ac1,'DisplayName','E2_2_ac1');plot(E2_2_ac2p2,'DisplayName','E2_2_ac2p2');hold off;legend('E2_2_1','E2_2_ac1','E2_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\E2.png');
+
+plot(E3_2_1,'DisplayName','E3_2_1');hold on;plot(E3_2_ac1,'DisplayName','E3_2_ac1');plot(E3_2_ac2p2,'DisplayName','E3_2_ac2p2');hold off;legend('E3_2_1','E3_2_ac1','E3_2_ac2p2');title('OpenWorkbench');xlabel('Cantidad de solicitudes simultáneas');ylabel('Tiempo');
+saveas(gcf,'C:\Users\chapitro\Desktop\plots2\E3.png');

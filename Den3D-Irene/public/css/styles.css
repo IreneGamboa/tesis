@@ -1,0 +1,413 @@
+/*.body-container{
+	background-color: black;
+	overflow: hidden;
+}*/
+
+body{
+	height:100%;
+    min-height: 100%;
+    background: #000000;
+    position:relative;
+}
+
+.header{
+	position: absolute;
+	top: 0;
+	left: 0;
+	margin-top: 1%;
+	margin-bottom: 0;
+	background-color: transparent;
+	border: none;
+	z-index: 10000;
+}
+
+.dropdown{
+	border: 2px solid #5940ff;
+	border-radius: 10px;
+	margin: 0 2px;
+}
+
+.navbar-nav > li{
+	margin-top: 5px;
+}
+
+.navbar-default .navbar-nav>li>a{
+	color: #fff;
+	padding: 8px;
+}
+
+.navbar-default .navbar-nav>li>.navbar-option{
+	color: #1A1A22;
+	padding: 8px;
+}
+
+.navbar-default .navbar-nav>li>a:hover{
+	color: #777;
+}
+
+.navbar-default .navbar-nav>li>a:{
+	color: #777;
+}
+
+.footer{
+	/*border-top: 4px solid #5940ff;*/
+	background-color: #b0b0b0;
+}
+
+.navbar-header > .navbar-brand{
+	color: black;
+}
+
+
+
+/*
+
+                    _ 
+                   | |
+   ___ __ _ _ __ __| |
+  / __/ _` | '__/ _` |
+ | (_| (_| | | | (_| |
+  \___\__,_|_|  \__,_|
+                      
+                      
+
+*/
+
+.modalDialog{
+	position: fixed;
+	z-index: 100;	
+	width: 20%;
+	top: 30%;
+	left: 40%;
+	overflow-y: hidden;
+	background: #3F3F3F;
+	opacity: 0.8;
+}
+.selectedCard{
+	opacity: 1;
+	z-index: 200;	
+}
+.modalDialog > .modal-header-bc {
+	margin-top: 10px;
+	height: 30px;
+}
+
+.card-title{
+    overflow-x: hidden;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+h5.card-title{
+	color: white;
+	font-family: "century gothic";
+	font-weight: bold;
+	font-size: 16px;
+	max-width: 72%;
+	padding-left: 17px;
+	overflow: hidden;
+}
+
+.card-separator{
+	margin-top: 0;
+	margin-bottom: 10px;	
+	border-color: #4C4C4C;
+	border-width: 2px 0px 0px;
+}
+
+.btn-group{
+	position: absolute;
+	right: 2px;
+	top: 0;
+	margin-left:2px;
+	margin-top: 10px;	
+}
+
+.mark-card-btn,.compress-card-btn,.expand-card-btn,.close-card-btn,.close-card-btn-mark{
+	border: none;
+	background: transparent;
+}
+
+.modalDialog > .card-body > .modal-img , img.modal-img{
+	text-align: center;
+	height: 150px;
+	width: 100%;
+	padding-left: 8.5px;
+	padding-right: 8.5px;
+}
+#markedItems,#searchModal{
+	height: 293px;
+	opacity: 1;
+}
+
+.modalDialog > .card-body > .card-subtitle{
+	margin: 10px 5px 5px 20px;
+}
+.scroll-desc{
+	margin: 10px 5px 5px 20px; 
+	width: 90%;
+    height:90px;
+    overflow-y:auto;
+}
+.card-desc{
+	font-family: "century gothic";
+	font-size: 12px;
+	color: #B2B2B2;
+	letter-spacing: 1px;
+    text-align:auto;
+}
+.modalDialog > .show-more-btn{
+	position: relative;
+	background: transparent;
+	left: 20px;
+	top: 5px;
+	margin-bottom: 5px;
+	border: none;
+}
+
+.modalDialog > .tell-more-btn{
+	font-family: "century gothic";
+	font-size: 12px;
+	width: 100%;
+	color: #36A9E1;
+	margin-left: 40%;
+	text-align: center;
+}
+
+.show{
+	visibility: visible;
+}
+
+.compress{
+	transform: rotateY(360deg);
+	height: 35px;
+	transition: transform 0.5s, height 0.5s;
+}
+
+.expand{
+	transform: rotateY(0deg);
+	height: 390px;
+	transition: transform 0.5s, height 0.5s;
+}
+
+.show-more{
+	height: 400px;
+	transition: transform 0.5s, height 0.5s;
+}
+
+/**************************************/
+
+
+/*
+
+  _              _ _    _ _   
+ | |            | | |  (_) |  
+ | |_ ___   ___ | | | ___| |_ 
+ | __/ _ \ / _ \| | |/ / | __|
+ | || (_) | (_) | |   <| | |_ 
+  \__\___/ \___/|_|_|\_\_|\__|
+                              
+                             
+
+*/
+
+#toolkit{
+	position: fixed;
+	z-index: 5000;
+	background-color: #1A1A22;
+	/*border:solid;
+	border-width: 3px;
+	border-color: #FFF700;*/
+}
+
+.hide-toolkit{
+	display: none;
+}
+
+#toolkit > ul{
+	padding: 5px;
+}
+
+#toolkit > ul > li {
+	list-style-type: none;
+}
+
+.tool-btn{
+	position: relative;
+	height: 20px;
+	width: 35px;
+	background-color: #000;
+	padding: 2px 4px;
+}
+
+#close-toolkit-btn{
+	position:relative;
+	margin: 2px 1px 0px 2px;
+	width: 95%;
+	height: 20px;
+	text-align: right;
+}
+
+/* Footer*/
+.footer{
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	z-index: 10000;
+}
+
+/* Main Container */
+#ThreeJS{
+	width: auto;
+	overflow: hidden;
+}
+
+/*			ABOUT			*/
+.team-member{
+	margin: auto;
+}
+/*
+      _____                   _   _     _         
+     |_   _|   ___     ___   | | | |_  (_)  _ __  
+       | |    / _ \   / _ \  | | | __| | | |  _ \ 
+       | |   | (_) | | (_) | | | | |_  | | | |_) |
+       |_|    \___/   \___/  |_|  \__| |_| |  __/ 
+                                           |_|    
+*/
+.tooltip{
+	width: 20%;
+	overflow-y: hidden;
+	color: white;
+	background: #1A1A22;
+	font-family: Verdana;
+	opacity: 0.8;
+	pointer-events: none;
+}
+
+.tooltip > .tooltip-body > .tooltip-img{
+	text-align: left;
+	min-height: 45px;
+	min-width: 45px;
+	background: #1A1A22;
+}
+
+.tooltip > .tooltip-body > .tooltip-subtitle{
+	margin: -45px 1px 1px 50px;
+	font-size: 10px;
+	font-style: italic;
+}
+
+.tooltip-desc{
+	margin: 10px 5px 5px 50px; 
+	position: absolute;
+	font-size: 10px;
+	letter-spacing: 1px;
+	overflow-y: hidden;
+	text-overflow: ellipsis;
+	text-align: left;
+}
+
+.show{
+	visibility: visible;
+}
+
+.hide{
+	visibility: hidden;
+}
+
+.toggle{
+	transform: rotateY(0deg);
+	height: 45px;
+	width: 225px;
+	transition: transform 0.5s, height 0.5s;
+}
+
+.tooltip-container{
+	position: fixed;
+}
+
+/**************************************/
+
+
+/*
+
+                    _ 
+                   | |
+   ___ __ _ _ __ __| |
+  / __/ _` | '__/ _` |
+ | (_| (_| | | | (_| |
+  \___\__,_|_|  \__,_|
+                      
+                      
+
+*/
+
+.modalDialog-mark{
+	position: fixed;
+	z-index: 100;	
+	width: 20%;
+	top: 30%;
+	left: 40%;
+	overflow-y: hidden;
+	background: #3F3F3F;
+	opacity: 0.8;
+}
+
+.modalDialog-mark > .modal-header-mark {
+	margin-top: 10px;
+	height: 30px;
+}
+
+.card-title-mark{
+    overflow-x: hidden;
+    margin-top: 0%;
+    margin-bottom: 0%;
+}
+h5.card-title-mark{
+	color: white;
+	font-family: "century gothic";
+	font-weight: bold;
+	font-size: 16px;
+	max-width: 50%;
+	padding-left: 17px;
+	overflow: hidden;
+}
+
+.card-separator-mark{
+	margin-top: 0;
+	margin-bottom: 10px;	
+	border-color: #4C4C4C;
+	border-width: 2px 0px 0px;
+}
+
+.btn-group-mark{
+	position: absolute;
+	right: 2px;
+	top: 0;
+	margin-left:2px;
+	margin-top: 10px;	
+}
+
+.close-card-btn-mark{
+	border: none;
+	background: transparent;
+}
+
+#markedItems{
+	height: 293px;
+	opacity: 1;
+}
+
+.modalDialog > .card-body > .card-subtitle{
+	margin: 10px 5px 5px 20px;
+}
+.scroll-desc{
+	margin: 10px 5px 5px 20px; 
+	width: 90%;
+    height:90px;
+    overflow-y:auto;
+}
+.expand{
+	transform: rotateY(0deg);
+	height: 390px;
+	transition: transform 0.5s, height 0.5s;
+}
