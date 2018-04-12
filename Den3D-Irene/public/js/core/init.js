@@ -14,7 +14,7 @@ var saveStructure = { // Información gráfica del grupo a guardar
 var procesing = false;
 var isMoved = true; // Bandera que indica si se ha cambiado la posición del grupo
 var objects = []; // Lista con los objetos gráficos creados por ThreeJS
-var controler = {}; // Controlador 
+var controler = {}; // Controlador
 controler.select = {}; // Objeto lógico que representa cuál nodo está siendo seleccionado en el árbol principal
 controler.move = {}; // Objeto lógico que representa cuál nodo está en moviento en el árbol principal
 */
@@ -112,16 +112,17 @@ function removeTooltip() {
 function update()
 {
 	var grados = 3*(Math.PI/180);
-	
-	if ( keyboard.pressed("right") ) 
-	{ 
+
+	if ( keyboard.pressed("right") )
+	{
+		console.log(group);
 		if (!procesing) {
 			removeTooltip();
 			group.rotation.y += grados;
 			saveStructure.rotation.y += grados;
 			isMoved = true;
 		};
-		
+
 	}
 	else if( keyboard.pressed("down"))
 	{
@@ -132,10 +133,11 @@ function update()
 			saveStructure.rotation.x += grados;
 			isMoved = true;
 		};
-		
+
 	}
 	else if( keyboard.pressed("left"))
 	{
+		console.log(group);
 		//$('.tooltip').addClass('hide');
 		if (!procesing) {
 			removeTooltip();
@@ -143,7 +145,7 @@ function update()
 			saveStructure.rotation.y -= grados;
 			isMoved = true;
 		};
-		
+
 	}
 	else if( keyboard.pressed("up"))
 	{
@@ -154,9 +156,9 @@ function update()
 			saveStructure.rotation.x -= grados;
 			isMoved = true;
 		};
-		
+
 	}
-	
+
 	else if( keyboard.pressed("a"))
 	{
 		if (!procesing) {
@@ -167,13 +169,13 @@ function update()
 
 	}
 	else if( keyboard.pressed("z"))
-	{	
-		if (!procesing) {			
+	{
+		if (!procesing) {
 			removeTooltip();
 			camera.position.z -= 15;
 			isMoved = true;
 		};
-		
+
 	}
 }
 
@@ -186,13 +188,13 @@ function onDocumentMouseDown( event ) {
 	vector.unproject(camera );
 	raycaster.ray.set( camera.position, vector.sub( camera.position ).normalize() );
 	var intersects = raycaster.intersectObjects( objects );
-	
+
 	var x = group.rotation.x;
 	var y = group.rotation.y;
-	
+
 	group.rotation.x = 0;
 	group.rotation.y = 0;
-	
+
 	render();
 	addSubTree(subGroup);
 	group.remove(subGroup);
@@ -227,6 +229,7 @@ function animate()
 }
 
 function keydown(e){
+	console.log(e.keyCode);
 		var grades = 3*(Math.PI/180);
 	    if(e.keyCode === 66) { // B
 			//alert("Traer al frente");
@@ -236,6 +239,35 @@ function keydown(e){
 		}
 		if(e.keyCode === 67) { // C
 			Commander.compress();
+		}
+		if(e.keyCode === 84) { // T
+			var radius = controler.select.radiusBottom,
+					coneFather = {
+						"x": controler.select.parent.x,
+						"y": controler.select.parent.y,
+						"z": controler.select.parent.z
+					},
+					cone = {
+						"x": controler.select.x,
+						"y": controler.select.y,
+						"z": controler.select.z
+					},
+					center = {
+						"x": controler.select.parent.x,
+						"y": controler.select.parent.y + 100,
+						"z": controler.select.parent.z
+					},
+					rotation = getRotation(radius, coneFather, cone, center, -15);
+			console.log("Rotation: ");
+			console.log(rotation)
+			console.log("Contoller: ")
+			console.log(controler.select);
+			debugger;
+			console.log("subGroup: ")
+			console.log(subGroup);
+			subGroup.rotation.z -= rotation.z;
+			subGroup.rotation.y -= rotation.y;
+			subGroup.rotation.x -= rotation.x;
 		}
 		if(e.keyCode === 88) { // X
 			// AÑADÍ controler.select
@@ -267,7 +299,7 @@ function keydown(e){
 			Commander.delete();
 		}
 		if(e.keyCode === 77) // M
-		{	
+		{
 			alert("menu");
 			//mostrarMenu();
 		}
@@ -280,26 +312,26 @@ function keydown(e){
 			increaseOpacity();
 		}
 		if(e.keyCode === 70) // F
-		{	
+		{
 			document.removeEventListener("keydown", keydown,true);
 			procesing = true;
 			discolorLeaf(controler.select);
-			discolor(controler.select);	
+			discolor(controler.select);
 			controler.first = controler.select;
 			controler.select = buscarNodoSiguiente(controler.select);
 			paintLeaf(controler.select);
 			if(controler.select.parent != controler.first.parent || isMoved){
 				controler.first = controler.select;
-				
+
 				group.rotation.x = group.rotation.x%(2 * Math.PI);
 				group.rotation.y = group.rotation.y%(2 * Math.PI);
-				
+
 				var newY = 0;
 				var newX = 0;
 
 				if (0 <= group.rotation.x && Math.PI >= group.rotation.x || 0 > group.rotation.x && -Math.PI <= group.rotation.x){
 					newX = 0;
-				} 
+				}
 				else if (group.rotation.x < -Math.PI && group.rotation.x >= -2*Math.PI ) {
 					newX = -(2*Math.PI);
 				} else {
@@ -308,7 +340,7 @@ function keydown(e){
 
 				if (0 <= group.rotation.y && Math.PI >= group.rotation.y || 0 > group.rotation.y && -Math.PI <= group.rotation.y){
 					newY = 0;
-				} 
+				}
 				else if (group.rotation.y < -Math.PI && group.rotation.y >= -2*Math.PI ) {
 					newY = -(2*Math.PI);
 				} else {
@@ -320,17 +352,17 @@ function keydown(e){
 				isMoved = false;
 
 				new TWEEN.Tween(group.rotation)
-					.to({x:newX,y:newY},1000) 
+					.to({x:newX,y:newY},1000)
 				.easing(TWEEN.Easing.Linear.None)
 				.start();
 
 				new TWEEN.Tween(camera.position)
-					.to({z:zoom},1000) 
+					.to({z:zoom},1000)
 				.easing(TWEEN.Easing.Linear.None)
 				.start();
-	
+
 				setTimeout(function(){
-					bringToFront();	
+					bringToFront();
 				}, 1050);
 			} else {
 				let angle = -1;
@@ -338,26 +370,26 @@ function keydown(e){
 			}
 		}
 		if(e.keyCode === 68) // D
-		{	
+		{
 			document.removeEventListener("keydown", keydown,true);
 			procesing = true;
 			discolorLeaf(controler.select);
-			discolor(controler.select);	
+			discolor(controler.select);
 			controler.first = controler.select;
 			controler.select = buscarNodoAnterior(controler.select);
 			paintLeaf(controler.select);
 			if(controler.select.parent != controler.first.parent || isMoved){
 				controler.first = controler.select;
-				
+
 				group.rotation.x = group.rotation.x%(2 * Math.PI);
 				group.rotation.y = group.rotation.y%(2 * Math.PI);
-				
+
 				var newY = 0;
 				var newX = 0;
 
 				if (0 <= group.rotation.x && Math.PI >= group.rotation.x || 0 > group.rotation.x && -Math.PI <= group.rotation.x){
 					newX = 0;
-				} 
+				}
 				else if (group.rotation.x < -Math.PI && group.rotation.x >= -2*Math.PI ) {
 					newX = -(2*Math.PI);
 				} else {
@@ -366,7 +398,7 @@ function keydown(e){
 
 				if (0 <= group.rotation.y && Math.PI >= group.rotation.y || 0 > group.rotation.y && -Math.PI <= group.rotation.y){
 					newY = 0;
-				} 
+				}
 				else if (group.rotation.y < -Math.PI && group.rotation.y >= -2*Math.PI ) {
 					newY = -(2*Math.PI);
 				} else {
@@ -378,17 +410,17 @@ function keydown(e){
 				isMoved = false;
 
 				new TWEEN.Tween(group.rotation)
-					.to({x:newX,y:newY},1000) 
+					.to({x:newX,y:newY},1000)
 				.easing(TWEEN.Easing.Linear.None)
 				.start();
 
 				new TWEEN.Tween(camera.position)
-					.to({z:zoom},1000) 
+					.to({z:zoom},1000)
 				.easing(TWEEN.Easing.Linear.None)
 				.start();
-	
+
 				setTimeout(function(){
-					bringToFront();	
+					bringToFront();
 				}, 1050);
 			} else {
 				let angle = 1;
@@ -418,13 +450,13 @@ function traerAlFrente(){
 	controler.first = controler.select;
 	group.rotation.x = group.rotation.x%(2 * Math.PI);
 	group.rotation.y = group.rotation.y%(2 * Math.PI);
-	
+
 	var newY = 0;
 	var newX = 0;
 
 	if (0 <= group.rotation.x && Math.PI >= group.rotation.x || 0 > group.rotation.x && -Math.PI <= group.rotation.x){
 		newX = 0;
-	} 
+	}
 	else if (group.rotation.x < -Math.PI && group.rotation.x >= -2*Math.PI ) {
 		newX = -(2*Math.PI);
 	} else {
@@ -433,7 +465,7 @@ function traerAlFrente(){
 
 	if (0 <= group.rotation.y && Math.PI >= group.rotation.y || 0 > group.rotation.y && -Math.PI <= group.rotation.y){
 		newY = 0;
-	} 
+	}
 	else if (group.rotation.y < -Math.PI && group.rotation.y >= -2*Math.PI ) {
 		newY = -(2*Math.PI);
 	} else {
@@ -443,22 +475,22 @@ function traerAlFrente(){
 	let zoom = TM.mainTree.diameter + 2000;
 
 	new TWEEN.Tween(group.rotation)
-		.to({x:newX,y:newY},1000) 
+		.to({x:newX,y:newY},1000)
 	.easing(TWEEN.Easing.Linear.None)
 	.start();
 
 	new TWEEN.Tween(camera.position)
-		.to({z:zoom},1000) 
+		.to({z:zoom},1000)
 	.easing(TWEEN.Easing.Linear.None)
 	.start();
 
 	setTimeout(function(){
 		if (controler.select.parent !== null) {
-			bringToFront();		
+			bringToFront();
 		}else{
 			focusLamina();
 		};
-		
+
 	}, 1050);
 }
 
@@ -470,7 +502,7 @@ function focusLamina(){
   	group.add(subGroup);
 
 	let zoom = subGroup.position.z + 600;
-	
+
 	new TWEEN.Tween(camera.position)
 		.to({z:zoom},1000)
 	.easing(TWEEN.Easing.Linear.None)
@@ -480,7 +512,120 @@ function focusLamina(){
 		document.addEventListener("keydown", keydown,true);
 		procesing = false;
 	}, 1050);
-	
+
+}
+
+function getTangent(center, point){
+	console.log(center);
+	console.log(point);
+  var x0 = center.x,
+      y0 = center.y,
+      x1 = point.x,
+      y1 = point.y,
+      m,
+      b,
+      tangent;
+
+  m = (y1-y0)/(x1-x0)
+  m = -1/m
+
+  b = y1- m*x1
+
+  tangent = {
+    "m": m,
+    "b": b
+  };
+
+  return tangent;
+}
+
+function getPlane(coneFather, center, point, radius) {
+  var angle = Math.random()*Math.PI*2,
+      newPoint = {
+        "x": center.x + Math.cos(angle)*radius,
+        "y": center.y,
+        "z": center.z + Math.sin(angle)*radius
+      };
+  newPoint = rotate(newPoint, coneFather.y, coneFather.x, coneFather.z)
+
+  var vX = point.x - center.x,
+      vY = point.y - center.y,
+      vZ = point.z - center.z,
+      wX = newPoint.x - center.x,
+      wY = newPoint.y - center.y,
+      wZ = newPoint.z - center.z,
+      a,b,c,d;
+
+  a = (vY * wZ) - (wY * vZ);
+  b = (wX * vZ) - (vX * wZ);
+  c = (vX * wY) - (wX * vY);
+  d = -((a*center.x)+(b*center.y)+(c*center.z));
+
+  return {
+    "a": a,
+    "b": b,
+    "c": c,
+    "d": d
+  }
+
+}
+
+function rotate(point,pitch, roll, yaw) {
+    var cosa = Math.cos(yaw),
+        sina = Math.sin(yaw),
+        cosb = Math.cos(pitch),
+        sinb = Math.sin(pitch),
+        cosc = Math.cos(roll),
+        sinc = Math.sin(roll),
+        Axx = cosa*cosb,
+        Axy = cosa*sinb*sinc - sina*cosc,
+        Axz = cosa*sinb*cosc + sina*sinc,
+        Ayx = sina*cosb,
+        Ayy = sina*sinb*sinc + cosa*cosc,
+        Ayz = sina*sinb*cosc - cosa*sinc,
+        Azx = -sinb,
+        Azy = cosb*sinc,
+        Azz = cosb*cosc,
+        px = point.x,
+        py = point.y,
+        pz = point.z;
+
+    point.x = Axx*px + Axy*py + Axz*pz;
+    point.y = Ayx*px + Ayy*py + Ayz*pz;
+    point.z = Azx*px + Azy*py + Azz*pz;
+
+    return point;
+}
+
+
+function getRotation(radius, coneFather, cone, center, degree) {
+  var plane = getPlane(coneFather, center, cone, radius),
+      tangent = getTangent(center, cone),
+      x0 = 0,
+      x1 = 1,
+      y0 = tangent.m * x0 + tangent.b,
+      y1 = tangent.m * x1 + tangent.b,
+      z0 = -(plane.a * x0 + plane.b * y0 + plane.d) / plane.c,
+      z1 = -(plane.a * x1 + plane.b * y1 + plane.d) / plane.c,
+      xD = Math.sqrt(Math.pow((x0-x1),2)),
+      yD = Math.sqrt(Math.pow((y0-y1),2)),
+      zD = Math.sqrt(Math.pow((z0-z1),2)),
+      length = Math.sqrt(xD^2+yD^2+zD^2),
+      xU = xD/length,
+      yU = yD/length,
+      zU = zD/length,
+      xRotation = xU * degree,
+      yRotation = yU * degree,
+      zRotation = zU * degree;
+
+	debugger;
+	console.log(plane);
+	console.log(tangent);
+  return {
+    "x": xRotation,
+    "y": yRotation,
+    "z": zRotation
+  }
 }
 
 init();
