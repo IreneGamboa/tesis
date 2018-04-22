@@ -241,12 +241,8 @@ function keydown(e){
 			Commander.compress();
 		}
 		if(e.keyCode === 84) { // T
+			debugger;
 			var radius = controler.select.radiusBottom,
-					coneFather = {
-						"x": controler.select.parent.x,
-						"y": controler.select.parent.y,
-						"z": controler.select.parent.z
-					},
 					cone = {
 						"x": controler.select.x,
 						"y": controler.select.y,
@@ -254,20 +250,22 @@ function keydown(e){
 					},
 					center = {
 						"x": controler.select.parent.x,
-						"y": controler.select.parent.y + 100,
+						"y": controler.select.parent.y - 150,
 						"z": controler.select.parent.z
 					},
-					rotation = getRotation(radius, coneFather, cone, center, -15);
+					rotation = getRotation(radius, controler.select.parent, cone, center, -15);
 			console.log("Rotation: ");
-			console.log(rotation)
-			console.log("Contoller: ")
-			console.log(controler.select);
-			debugger;
-			console.log("subGroup: ")
-			console.log(subGroup);
-			subGroup.rotation.z -= rotation.z;
-			subGroup.rotation.y -= rotation.y;
-			subGroup.rotation.x -= rotation.x;
+			console.log(rotation);
+			var axis = new THREE.Vector3(rotation.x, rotation.y, rotation.z);
+			var result = rotateAroundObjectAxis(subGroup, axis, 5 * (Math.PI/180));
+			console.log("result:");
+			console.log(result);
+			// if(result.x + result.y + result.z < Math.PI/2){
+				new TWEEN.Tween(subGroup.rotation)
+					.to({x:result.x,y:result.y,z:result.z},1000)
+				.easing(TWEEN.Easing.Linear.None)
+				.start();
+			// }
 		}
 		if(e.keyCode === 88) { // X
 			// AÑADÍ controler.select
@@ -519,17 +517,16 @@ function getTangent(center, point){
 	console.log(center);
 	console.log(point);
   var x0 = center.x,
-      y0 = center.y,
+      z0 = center.z,
       x1 = point.x,
-      y1 = point.y,
+      z1 = point.z,
       m,
       b,
       tangent;
 
-  m = (y1-y0)/(x1-x0)
-  m = -1/m
-
-  b = y1- m*x1
+  m = (z1-z0)/(x1-x0)
+	m = -1/m;
+  b = z1- m*x1
 
   tangent = {
     "m": m,
@@ -540,13 +537,14 @@ function getTangent(center, point){
 }
 
 function getPlane(coneFather, center, point, radius) {
-  var angle = Math.random()*Math.PI*2,
+  var angle = 90*Math.PI/180,
       newPoint = {
         "x": center.x + Math.cos(angle)*radius,
         "y": center.y,
         "z": center.z + Math.sin(angle)*radius
       };
-  newPoint = rotate(newPoint, coneFather.y, coneFather.x, coneFather.z)
+  newPoint = rotate(newPoint, coneFather.refCone.rotation.y,
+		coneFather.refCone.rotation.x, coneFather.refCone.rotation.z)
 
   var vX = point.x - center.x,
       vY = point.y - center.y,
@@ -603,29 +601,58 @@ function getRotation(radius, coneFather, cone, center, degree) {
       tangent = getTangent(center, cone),
       x0 = 0,
       x1 = 1,
-      y0 = tangent.m * x0 + tangent.b,
-      y1 = tangent.m * x1 + tangent.b,
-      z0 = -(plane.a * x0 + plane.b * y0 + plane.d) / plane.c,
-      z1 = -(plane.a * x1 + plane.b * y1 + plane.d) / plane.c,
-      xD = Math.sqrt(Math.pow((x0-x1),2)),
-      yD = Math.sqrt(Math.pow((y0-y1),2)),
-      zD = Math.sqrt(Math.pow((z0-z1),2)),
-      length = Math.sqrt(xD^2+yD^2+zD^2),
+      z0 = tangent.m * x0 + tangent.b,
+      z1 = tangent.m * x1 + tangent.b,
+      y0 = -(plane.a * x0 + plane.c * z0 + plane.d) / plane.b,
+      y1 = -(plane.a * x1 + plane.c * z1 + plane.d) / plane.b,
+      xD = x1-x0,
+      yD = y1-y0,
+      zD = z1-z0,
+      length = Math.sqrt(Math.pow(xD,2)+Math.pow(yD,2)+Math.pow(zD,2)),
       xU = xD/length,
       yU = yD/length,
-      zU = zD/length,
-      xRotation = xU * degree,
-      yRotation = yU * degree,
-      zRotation = zU * degree;
+      zU = zD/length;
 
 	debugger;
 	console.log(plane);
 	console.log(tangent);
   return {
-    "x": xRotation,
-    "y": yRotation,
-    "z": zRotation
+    "x": xU,
+    "y": yU,
+    "z": zU
   }
+}
+
+function rotateAroundObjectAxis(object, axis, radians) {
+	var rotObjectMatrix, originalMatrix;
+	rotObjectMatrix = new THREE.Matrix4
+	originalMatrix = object.matrix.clone();
+
+	rotObjectMatrix.makeRotationAxis(axis.normalize(), radians);
+
+	// old code for Three.JS pre r54:
+	// object.matrix.multiplySelf(rotObjectMatrix);      // post-multiply
+	// new code for Three.JS r55+:
+	object.matrix.multiply(rotObjectMatrix);
+
+	// old code for Three.js pre r49:
+	// object.rotation.getRotationFromMatrix(object.matrix, object.scale);
+	// old code for Three.js r50-r58:
+	// object.rotation.setEulerFromRotationMatrix(object.matrix);
+	// new code for Three.js r59+:
+	debugger;
+	object.rotation.setFromRotationMatrix(object.matrix);
+	var x = object.rotation.x;
+	var y = object.rotation.y;
+	var z = object.rotation.z;
+	object.matrix = originalMatrix;
+	object.rotation.setFromRotationMatrix(object.matrix);
+
+	return {
+		"x": x,
+		"y": y,
+		"z": z
+	}
 }
 
 init();
