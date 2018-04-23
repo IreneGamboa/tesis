@@ -25,6 +25,7 @@ function generateNode(nodeNumber) {
     "_id": {
 		"$oid": getObjectId()
 	},
+  "level": 0,
 	"validName": getValidName(nodeNumber),
 	"description": "",
 	"img_src": getNodeImage(),
@@ -170,6 +171,62 @@ function createDepthTree(cantNivels, maxNode){
   generateJSONFile(nameFile, tree);
 }
 
+function checkDepth(cantNiveles, nodes){
+  for(i = 0; i < nodes.length; i++){
+    if(nodes[i].level == cantNiveles)
+     return true;
+  }
+  return false;
+}
+
+function createDepth2Tree(cantNivels, maxNode, minNode){
+  console.log("max"+ maxNode);
+  console.log(minNode);
+  console.log(maxNode-minNode)
+  var listNodes = [],
+		  listTree = [],
+      tree = "",
+      nameFile = "tree_depth2_"+cantNivels+"_nivels",
+      raiz = generateNode("raiz_"+nameFile);
+
+  listTree.push(raiz);
+  listNodes.push(raiz);
+  tree = tree + JSON.stringify(raiz) + "\n"
+  console.log(listNodes[0]);
+
+while(listNodes.length > 0){
+
+  var randomNumber = getRandomInt(minNode, maxNode)
+  raiz = listNodes[0];
+  listNodes.splice(raiz, 1);
+  console.log("random: " + randomNumber);
+  for(i = 0; i < randomNumber; i++) {
+
+    var node = generateNode(raiz.name + "_" + i);
+
+    node.level = raiz.level + 1;
+    if(node.level < cantNivels){
+      assignParent(node, raiz);
+      listTree.push(node);
+      listNodes.push(node);
+      tree = tree + JSON.stringify(node) + "\n"
+    } else {
+      break;
+    }
+  }
+}
+
+  console.log(tree);
+  generateJSONFile(nameFile, tree);
+}
+
+function getRandomInt(min, max) {
+  min = Math.ceil(min);
+  max = Math.floor(max);
+  return Math.floor(Math.random() * (max - min)) + min; //The maximum is exclusive and the minimum is inclusive
+}
+
+
 // createRandomTree(200);
 
 // createTree(4,7);
@@ -207,6 +264,16 @@ if (process.argv.length <= 2){
             console.log("Debe ingresar más parámetros ejemplo: \n anchura cant_niveles [10] maxNode [4]");
           }
           break;
+      case 'profundidad2':
+              if (process.argv.length === 6){
+                var cantNivels = process.argv[3],
+                    maxNode = process.argv[4],
+                    minNode = process.argv[5];
+                createDepth2Tree(cantNivels, maxNode, minNode);
+              } else {
+                console.log("Debe ingresar más parámetros ejemplo: \n anchura cant_niveles [10] maxNode [4] minNode [2]");
+              }
+              break;
 
     }
 }
